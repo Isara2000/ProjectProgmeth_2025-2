@@ -10,11 +10,12 @@ An idle cliker game where players washing dishes to fund their scratch-off lotte
 ### Minimum Viable Product
 - [ ] A clickable dirty plate.
 - [ ] A Shop
+- [ ] A basic GUI for game.
 - [ ] A time management system.
 - [ ] A money counter.
 - [ ] A basic shop to buy lottery.
 - [ ] A random number generator to determine if the ticket wins.
-- [ ] A upgradable machine.
+- [ ] An upgradable machine.
 > what should we add next?
 
 ### Future features 
