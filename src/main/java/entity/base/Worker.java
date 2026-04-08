@@ -1,6 +1,6 @@
 package entity.base;
 
-public abstract class Worker extends GameObject implements Updatable, Purchasable {
+public abstract class Worker extends Entity implements Updatable, Purchasable {
     private double price;
     private double workRate; //dish washing speed rate
 
