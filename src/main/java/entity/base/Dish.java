@@ -1,6 +1,6 @@
 package entity.base;
 
-public abstract class Dish extends GameObject implements Clickable {
+public abstract class Dish extends Entity implements Clickable {
     private double baseReward;
 
     public Dish(String name, String description, double baseReward) {

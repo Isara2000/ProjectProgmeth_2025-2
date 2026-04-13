@@ -5,13 +5,16 @@ import entity.base.Entity;
 public class Player extends Entity{
     private String name;
     private final Wallet wallet;
+    private final Inventory inventory;
 
     protected Player(String name, String description) {
         super(name, description);
         this.wallet = new Wallet();
+        this.inventory = new Inventory();
     }
 
     public Wallet getWallet() {
-        return wallet;
+        return this.wallet;
     }
+    public Inventory getInventory() { return this.inventory; }
 }

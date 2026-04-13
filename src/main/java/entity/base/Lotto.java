@@ -5,49 +5,34 @@ import logic.GameLogic;
 
 import java.util.ArrayList;
 
-public abstract class Lotto extends Entity {
-    private String companyName;
-    private double price;
-    private double reward;
-    private int numberRange;
-    private int numberPerTicket;
-    private ArrayList<Integer> winningNumbers;
+public abstract class Lotto extends Entity implements Purchasable{
+    private final String companyName;
+    private final double price;
+    private final double reward;
+    private final int numberRange;
+    private final int numberPerTicket;
+    private ArrayList<String> winningNumbers;
+    private final int winningNumberPerTicket;
+    private ArrayList<String> listOfNumber;
 
     protected Lotto(String id,String description, String companyName, double price, double reward, int numberRange, int numberPerTicket, int winningNumbersPerTicket){
         super(id, description);
-        setPrice(price);
-        setReward(reward);
-        setCompanyName(companyName);
-        setNumberRange(numberRange);
-        setNumberPerTicket(numberPerTicket);
+        this.companyName = companyName;
+        this.price = Math.max(0,price);
+        this.reward = Math.max(0,reward);
+        this.numberRange = Math.max(0,numberRange);
+        this.numberPerTicket = Math.max(0,numberPerTicket);
         setWinningNumbers(winningNumbersPerTicket);
+        this.winningNumberPerTicket = winningNumbersPerTicket;
+        setListOfNumber(this.numberPerTicket);
     }
 
-    public void cashing(Player player, int match){
+    public void cashing(Player player){
+        int match = this.checkTheTicket();
         player.getWallet().add(reward*match);
     }
 
-    public abstract void checkTheTicket();
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public void setPrice(double price) {
-        this.price = Math.max(0,price);
-    }
-
-    public void setReward(double reward) {
-        this.reward = Math.max(0,reward);
-    }
-
-    public void setNumberRange(int numberRange) {
-        this.numberRange = Math.max(0,numberRange);
-    }
-
-    public void setNumberPerTicket(int numberPerTicket) {
-        this.numberPerTicket = Math.max(0,numberPerTicket);
-    }
+    public abstract int checkTheTicket();
 
     public double getPrice() {
         return price;
@@ -69,11 +54,23 @@ public abstract class Lotto extends Entity {
         return numberPerTicket;
     }
 
+    public int getWinningNumberPerTicket() {
+        return winningNumberPerTicket;
+    }
+
     public void setWinningNumbers(int winningNumbersPerTicket) {
         this.winningNumbers = GameLogic.generateNumber(winningNumbersPerTicket);
     }
 
-    public ArrayList<Integer> getWinningNumbers() {
+    public ArrayList<String> getWinningNumbers() {
         return winningNumbers;
+    }
+
+    public void setListOfNumber(int length) {
+        this.listOfNumber = GameLogic.generateNumber(length);
+    }
+
+    public ArrayList<String> getListOfNumber() {
+        return this.listOfNumber;
     }
 }
