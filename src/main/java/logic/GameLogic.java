@@ -1,6 +1,6 @@
 package logic;
 
-import entity.lotto.ListOfLottoCompany;
+import entity.lotto.LottoBrands;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,9 +20,41 @@ public class GameLogic {
         }
         return resultNumber;
     }
+    public static ArrayList<ArrayList<String>> groupNumber(ArrayList<String> initialNumbers, int row, int column){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(int i = 0; i < row; i++){
+            ArrayList<String> temporaryColumn = new ArrayList<>();
+            for(int j = 0; j < column; j++){
+                int index = i*column+j;
+                if(index < initialNumbers.size()){
+                    temporaryColumn.add(initialNumbers.get(index));
+                }else{
+                    temporaryColumn.add("0");
+                }
+            }
+            result.add(temporaryColumn);
+        }
+        return result;
+    }
+    public static ArrayList<ArrayList<String>> groupNumber(ArrayList<String> initialNumbers, int row, int column, String exceedNumber){
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for(int i = 0; i < row; i++){
+            ArrayList<String> temporaryColumn = new ArrayList<>();
+            for(int j = 0; j < column; j++){
+                int index = i*column+j;
+                if(index < initialNumbers.size()){
+                    temporaryColumn.add(initialNumbers.get(index));
+                }else{
+                    temporaryColumn.add(exceedNumber);
+                }
+            }
+            result.add(temporaryColumn);
+        }
+        return result;
+    }
     public static String createLottoId(String companyName){
         int length = 10;
-        String companyCode = ListOfLottoCompany.valueOf(companyName).getCompanyCode();
+        String companyCode = LottoBrands.valueOf(companyName.toUpperCase()).getCompanyCode();
         StringBuilder sb = new StringBuilder(length);
         ThreadLocalRandom rnd = ThreadLocalRandom.current();
         for (int i = 0; i < length; i++) {

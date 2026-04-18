@@ -7,7 +7,7 @@ public class Player extends Entity{
     private final Wallet wallet;
     private final Inventory inventory;
 
-    protected Player(String name, String description) {
+    public Player(String name, String description) {
         super(name, description);
         this.wallet = new Wallet();
         this.inventory = new Inventory();

@@ -6,25 +6,30 @@ import logic.GameLogic;
 import java.util.ArrayList;
 
 public abstract class Lotto extends Entity implements Purchasable{
-    private final String companyName;
     private final double price;
+    private final Category category;
+    private final String id;
+    private final String brandName;
     private final double reward;
-    private final int numberRange;
-    private final int numberPerTicket;
+    private final ArrayList<ArrayList<String>> numbers;
     private ArrayList<String> winningNumbers;
-    private final int winningNumberPerTicket;
-    private ArrayList<String> listOfNumber;
 
-    protected Lotto(String id,String description, String companyName, double price, double reward, int numberRange, int numberPerTicket, int winningNumbersPerTicket){
-        super(id, description);
-        this.companyName = companyName;
+    protected Lotto(String name,
+                    String description,
+                    String id,
+                    String brandName,
+                    double price,
+                    double reward,
+                    ArrayList<ArrayList<String>> numbers,
+                    int winningNumbersPerTicket){
+        super(name, description);
+        this.id = id;
+        this.category = Category.LOTTO;
+        this.brandName = brandName;
         this.price = Math.max(0,price);
         this.reward = Math.max(0,reward);
-        this.numberRange = Math.max(0,numberRange);
-        this.numberPerTicket = Math.max(0,numberPerTicket);
+        this.numbers = numbers;
         setWinningNumbers(winningNumbersPerTicket);
-        this.winningNumberPerTicket = winningNumbersPerTicket;
-        setListOfNumber(this.numberPerTicket);
     }
 
     public void cashing(Player player){
@@ -34,28 +39,27 @@ public abstract class Lotto extends Entity implements Purchasable{
 
     public abstract int checkTheTicket();
 
+    @Override
+    public Category getCategory() {
+        return category;
+    }
+
+    @Override
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public double getReward() {
         return reward;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public int getNumberRange() {
-        return numberRange;
-    }
-
-    public int getNumberPerTicket() {
-        return numberPerTicket;
-    }
-
-    public int getWinningNumberPerTicket() {
-        return winningNumberPerTicket;
+    public String getBrandName() {
+        return brandName;
     }
 
     public void setWinningNumbers(int winningNumbersPerTicket) {
@@ -66,11 +70,7 @@ public abstract class Lotto extends Entity implements Purchasable{
         return winningNumbers;
     }
 
-    public void setListOfNumber(int length) {
-        this.listOfNumber = GameLogic.generateNumber(length);
-    }
-
-    public ArrayList<String> getListOfNumber() {
-        return this.listOfNumber;
+    public ArrayList<ArrayList<String>> getNumbers() {
+        return numbers;
     }
 }

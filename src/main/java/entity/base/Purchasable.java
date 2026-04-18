@@ -2,5 +2,8 @@ package entity.base;
 
 public interface Purchasable {
     double getPrice();
-    void buy();
+    String getName();
+    String getDescription();
+    Category getCategory();
+    String getId();
 }
